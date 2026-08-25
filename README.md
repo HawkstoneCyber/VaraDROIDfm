@@ -575,9 +575,20 @@ unexplained compatibility problems.
 
 ------------------------------------------------------------------------
 
-## AI-Assisted Development
+## Credits / Tools / AI-Assisted Development
 
-This project was developed with technical assistance from ChatGPT (GPT-5.6 Sol) and Claude (Opus 5), including diagnostic test design, Bash scripting, Wine/Box64 troubleshooting, controlled A/B analysis, and documentation.
+Baofeng (Amateur UHF/VHF HT radios DM-32UV, UV-5RM, UV-17GPSPro - https://www.baofengradio.com)
+Box64 (Linux Userspace x86-64 Emulator by ptitSeb - https://box86.org)
+DigiRig (Audio/PTT interface - https://digirig.net/product/digirig-mobile)
+Samsung Galaxy S25 Ultra (Android 16 - https://www.samsung.com/us/smartphones/galaxy-s25-ultra)
+Termux (Android Terminal Emulator - https://termux.dev/en)
+Ubuntu 22 (OS - https://ubuntu.com)
+Vara FM (by Jose Alberto Nieto Ros aka EA5HVK - https://varamodem.com)
+Wine (Compatibility Layer - https://www.winehq.org)
+Winlink (Global Radio Email - https://winlink.org)
+WoAD (Winlink Client - https://woad.sumusltd.com)
+
+This project was developed with devops technical assistance from ChatGPT (GPT-5.6 Sol) and Claude (Opus 5), including diagnostic test design, Bash scripting, Wine/Box64 troubleshooting, controlled A/B analysis, and documentation.
 
 ------------------------------------------------------------------------
 
@@ -592,3 +603,5 @@ DigiRig interfaces, radios, and VARA FM releases.
 Operators are responsible for configuring and operating their stations
 in accordance with applicable amateur-radio regulations and licensing
 requirements.
+
+73s
