@@ -462,7 +462,7 @@ Development and testing have primarily used:
 
 -   Galaxy S25 ARM64 Android device
 -   DigiRig Mobile USB-C interface with Silicon Labs CP210x serial and audio interfaces
--   Baofeng DM32-UV VHF/UHF radio
+-   Baofeng DM32-UV, UV-5RM, and UV-17ProGPS VHF/UHF radios
 
 USB audio and serial/PTT are handled independently, allowing each path
 to be tested without assuming the other is operational.
@@ -518,7 +518,7 @@ During final validation, two unrelated physical-layer problems were also isolate
 The resulting full-stack known-good state was preserved as checkpoint:
 
 ``` text
-300B009-20260824_0058-WOAD-VARA-FULL-KNOWN-GOOD.tar
+XXXXXXX-20260824_0058-WOAD-VARA-FULL-KNOWN-GOOD.tar
 ```
 
 ------------------------------------------------------------------------
@@ -572,6 +572,12 @@ technical experimenters interested in:
 The project also aims to provide enough diagnostic information for
 failures to be reproduced and investigated rather than treated as
 unexplained compatibility problems.
+
+------------------------------------------------------------------------
+
+## AI-Assisted Development
+
+This project was developed with technical assistance from ChatGPT (GPT-5.6 Sol) and Claude Opus 5, including diagnostic test design, Bash scripting, Wine/Box64 troubleshooting, controlled A/B analysis, and documentation.
 
 ------------------------------------------------------------------------
 
