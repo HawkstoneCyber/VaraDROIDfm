@@ -1,5 +1,5 @@
 # VaraDROIDfm
-Run VARA FM under Wine on Android/Termux with DigiRig USB audio and PTT, providing automated startup, diagnostics, recovery, and WoAD/VARA TCP integration.
+Run VARA FM under Wine on Android/Termux with DigiRig USB audio and PTT, providing automated startup, diagnostics, recovery, and WoAD/VARA TCP integration. (staging and configuration files forthcoming)
 
 <img width="377" alt="VaraDROIDfm running VARA FM on Android" src="VaraDROIDfm-20260824_1840_05.png" />
 
