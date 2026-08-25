@@ -583,7 +583,7 @@ unexplained compatibility problems.
 -   Samsung (Galaxy S25 Ultra Android 16 - https://www.samsung.com/us/smartphones/galaxy-s25-ultra)
 -   Termux (Android Terminal Emulator - https://termux.dev/en)
 -   Ubuntu 22 (OS - https://ubuntu.com)
--   Vara FM (by Jose Alberto Nieto Ros aka EA5HVK - https://varamodem.com)
+-   VARA FM (by Jose Alberto Nieto Ros aka EA5HVK - https://varamodem.com)
 -   Wine (Compatibility Layer - https://www.winehq.org)
 -   Winlink (Global Radio Email - https://winlink.org)
 -   WoAD (Winlink Client - https://woad.sumusltd.com)
