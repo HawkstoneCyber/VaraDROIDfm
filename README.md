@@ -577,7 +577,7 @@ unexplained compatibility problems.
 
 ## AI-Assisted Development
 
-This project was developed with technical assistance from ChatGPT (GPT-5.6 Sol) and Claude Opus 5, including diagnostic test design, Bash scripting, Wine/Box64 troubleshooting, controlled A/B analysis, and documentation.
+This project was developed with technical assistance from ChatGPT (GPT-5.6 Sol) and Claude (Opus 5), including diagnostic test design, Bash scripting, Wine/Box64 troubleshooting, controlled A/B analysis, and documentation.
 
 ------------------------------------------------------------------------
 
