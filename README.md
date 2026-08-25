@@ -1,7 +1,13 @@
 # VaraDROIDfm
 Run VARA FM under Wine on Android/Termux with DigiRig USB audio and PTT, providing automated startup, diagnostics, recovery, and WoAD/VARA TCP integration.
 
-<img width="377" height="921" alt="VaraDROIDfm-20260824_1840_05" src="https://github.com/user-attachments/assets/991c2459-fbfd-4373-ba69-1cefefa066f8" />
+<img width="377" alt="VaraDROIDfm running VARA FM on Android" src="VaraDROIDfm-20260824_1840_05.png" />
+
+## Demonstration
+
+[Watch the VaraDROIDfm / WoAD demonstration](VaraDROIDfm-20260824_1840_05.mp4)
+
+The demonstrated production configuration successfully provides **full bidirectional WoAD messaging over VARA FM**, including DigiRig USB audio, RTS/PTT, RF connection establishment, message transmission, and message reception.
 
 This project documents and automates an Android-based VARA FM
 environment designed for packet-radio applications such as **WoAD**. It
@@ -72,9 +78,7 @@ a radio:
 
 ### VARA FM Runtime
 
-VARA FM executes as a Windows application inside Wine. Box64 provides
-the translation layer required to execute the x86-64 Wine environment on
-ARM64 Android.
+VARA FM executes as a 32-bit Windows application inside Wine 11.14 New WoW64. On the ARM64 Android target, **Box64** translates the x86-64 Wine components while **WowBox64** provides execution of the 32-bit x86 VARA FM code used by Wine's New WoW64 path. This distinction became important during compatibility testing because not every Box64 DynaRec option is applicable to WowBox64.
 
 ``` text
 VARAFM.exe
@@ -208,8 +212,7 @@ This helps isolate problems involving:
 
 ## WoAD Integration
 
-One project objective is to allow **WoAD running natively on Android**
-to use VARA FM running inside the Termux/Wine environment.
+**WoAD running natively on Android has now been validated end-to-end with VARA FM running inside the Termux/Wine environment.**
 
 ``` text
 WoAD
@@ -362,6 +365,62 @@ Testing has included:
 
 ------------------------------------------------------------------------
 
+
+## Ubuntu 26 x86-64 Control Testing
+
+A separate **Ubuntu 26 Hyper-V x86-64 VM** was used as an architectural control environment. The purpose was not to reproduce the Android hardware stack, but to remove ARM64 translation from the VARA/Wine execution path.
+
+``` text
+Ubuntu 26 x86-64 VM
+       ↓
+Wine / VARA FM
+       ↓
+No ARM64 Box64/WowBox64 translation
+```
+
+The x86-64 control helped narrow the Android-specific command-processing problem away from VARA command syntax itself and toward the ARM64 translation layer. This led to the focused **300A Box64/WowBox64 test series**.
+
+------------------------------------------------------------------------
+
+## 300A Box64 / WowBox64 Investigation
+
+A key compatibility defect appeared on the Android ARM64 environment: argument-bearing VARA commands such as:
+
+``` text
+MYCALL W4HAX<CR>
+```
+
+were received by VARA but returned:
+
+``` text
+WRONG<CR>
+```
+
+The same command was valid in control environments. Testing therefore focused on DynaRec behavior while keeping the surrounding Android/Termux/Wine/VARA environment constant.
+
+The controlled results included:
+
+| Configuration | `MYCALL W4HAX` |
+| --- | --- |
+| Default DynaRec / SAFEFLAGS=1 | `WRONG` |
+| `BOX64_DYNAREC_SAFEFLAGS=0` | `WRONG` |
+| `BOX64_DYNAREC_STRONGMEM=1` | `WRONG` |
+| DynaRec disabled | `OK` |
+| Conservative Box64 profile | `OK` |
+| **`BOX64_DYNAREC_SAFEFLAGS=2`** | **`OK`** |
+
+The minimal production correction was therefore:
+
+``` bash
+export BOX64_DYNAREC_SAFEFLAGS=2
+```
+
+This retained DynaRec performance while correcting VARA's command handling. The setting was promoted into production `ss-5`, followed by validation of normal GUI rendering, tone generation, `MYCALL`, DigiRig PTT, TX/RX audio, and WoAD operation.
+
+The investigation also demonstrated why Box64 and WowBox64 must be considered separately: VARA FM is 32-bit, so a setting must actually apply to the 32-bit New WoW64 execution path to be meaningful to this application.
+
+------------------------------------------------------------------------
+
 ## Native Windows Control Testing
 
 Native Windows VARA FM is used as a control environment when
@@ -432,6 +491,38 @@ radio installation.
 
 ------------------------------------------------------------------------
 
+## Validated End-to-End Path
+
+The completed production configuration has successfully exercised the complete path:
+
+``` text
+WoAD (Android)
+   ↓ TCP command/data
+VARA FM
+   ↓ Wine 11.14 New WoW64
+Box64 / WowBox64 (SAFEFLAGS=2)
+   ↓
+PulseAudio + USB bridges
+   ↓
+DigiRig audio + CP210x RTS/PTT
+   ↓
+VHF/UHF radio
+   ↓ RF
+Remote VARA station / Winlink path
+   ↓
+Bidirectional message transfer
+```
+
+During final validation, two unrelated physical-layer problems were also isolated. An intermittent USB audio loss was traced to a **bad USB-C cable**, and the remaining marginal RF/session behavior was resolved by an **antenna swap**. These were kept separate from the Box64 compatibility diagnosis.
+
+The resulting full-stack known-good state was preserved as checkpoint:
+
+``` text
+300B009-20260824_0058-WOAD-VARA-FULL-KNOWN-GOOD.tar
+```
+
+------------------------------------------------------------------------
+
 ## Project Status
 
 The project has demonstrated the major components required for VARA FM
@@ -449,12 +540,16 @@ operation on Android, including:
 -   [x] Direct protocol testing
 -   [x] TCP proxy/capture operation
 -   [x] WoAD-to-VARA connectivity testing
+-   [x] WoAD RF connection establishment
+-   [x] WoAD message transmission
+-   [x] WoAD message reception
+-   [x] Full bidirectional end-to-end WoAD/VARA FM operation
+-   [x] Ubuntu 26 x86-64 architectural control testing
+-   [x] Box64/WowBox64 DynaRec isolation and SAFEFLAGS=2 production fix
 -   [x] Automated startup and diagnostics
 -   [x] Known-good recovery checkpoints
 
-Development continues around improving reliability, simplifying startup,
-and investigating behavioral differences between native Windows VARA FM
-and VARA FM operating through Wine on Android.
+The full production path has now been demonstrated with **successful WoAD message transmission and reception over RF**. Development can therefore focus on reliability, packaging, startup simplification, and regression testing rather than basic feasibility.
 
 ------------------------------------------------------------------------
 
