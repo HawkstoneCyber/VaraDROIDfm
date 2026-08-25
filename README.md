@@ -1,4 +1,4 @@
-# Vara FM on Android (codename VaraDROIDfm)
+# VARA FM on Android (codename VaraDROIDfm)
 Run VARA FM under Wine on Android/Termux with DigiRig USB audio and PTT, providing automated startup, diagnostics, recovery, and WoAD/VARA TCP integration. (staging and configuration files forthcoming)
 
 <img width="377" alt="VaraDROIDfm running VARA FM on Android" src="VaraDROIDfm-20260824_1840_05.png" />
@@ -7,10 +7,10 @@ Run VARA FM under Wine on Android/Termux with DigiRig USB audio and PTT, providi
 
 [Watch the VaraDROIDfm / WoAD demonstration](VaraDROIDfm-20260824_1840_05.mp4)
 
-The demonstrated production configuration successfully provides **full bidirectional WoAD messaging over VARA FM**, including DigiRig USB audio, RTS/PTT, RF connection establishment, message transmission, and message reception.
+The demonstrated production configuration successfully provides **full bidirectional Winlink messaging using the WoAD client over VARA FM**, including DigiRig USB audio, RTS/PTT, RF connection establishment, message transmission, and message reception.
 
-This project documents and automates an Android-based VARA FM
-environment designed for packet-radio applications such as **WoAD**. It
+This project documents and automates an Android-based VARA FM digital modem 
+environment designed for Winlink global radio email applications such as **WoAD**. It
 combines the compatibility, USB, audio, PTT, networking, startup,
 diagnostic, and recovery components needed to operate VARA FM with
 actual radio hardware.
@@ -19,7 +19,7 @@ actual radio hardware.
 
 ## Overview
 
-VARA FM is a Windows application. Running it on an ARM64 Android device
+VARA FM is a digital modem Windows application. Running it on an ARM64 Android device
 requires several compatibility and hardware-integration layers:
 
 ``` text
